@@ -72,3 +72,4 @@ export function ansArray(symmatricNum: number, multiblyNumber: number) {
   }
   return answers;
 }
+// i wonna compleat the task of ez od monad

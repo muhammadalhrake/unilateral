@@ -54,15 +54,18 @@ let ezProbabilityPyramid: A = {
 let ez = new Array<number>();
 let hard = new Array<number>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
-  generateQuestions: monad;
-  for (let i = 0; i < count; i++) {
-    for (let j = 0; j < ruls.length; j++) {
-      for (let k = 0; k < state.length; k++) {
+  let generateQuestions: monad[];
+  let generate: monad;
+  for (let i = 0; i < count; ) {
+    for (let j = 0; j < ruls.length && i < count; j++) {
+      for (let k = 0; k < state.length && i < count; k++) {
         let rule = ruls[j];
         let stat = state[k];
         if (rule == 'monad') {
-          generateMonad(ez, hard, stat);
+          generate = generateMonad(ez, hard, stat);
         }
+        i++;
+        generateQuestions.push(generate);
       }
     }
   }

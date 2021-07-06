@@ -54,7 +54,7 @@ let ezProbabilityPyramid: A = {
 let ez = new Array<number>();
 let hard = new Array<number>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
-  let generateQuestions: monad[];
+  let generateQuestions = new Array<monad>();
   let generate: monad;
   for (let i = 0; i < count; ) {
     for (let j = 0; j < ruls.length && i < count; j++) {
@@ -74,7 +74,9 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
 function generateMonad(ez: number[], hard: number[], stat: string) {
   if (stat == 'Easy') {
     return ezgeneratemonad(ezProbabilityPyramid, ez);
-  } else [];
+  } else {
+    console.log('hello faild');
+  }
 }
 
 /* in this function we generat singel guestion for eazy monad */
@@ -82,6 +84,8 @@ function ezgeneratemonad(ezProbabilityPyramid: A, ez: number[]) {
   let firstNum = between(1, 8);
   if (ez.length == 0) {
     ez.push(firstNum);
+    console.log(firstNum);
+    console.log(ezProbabilityPyramid[firstNum].Easy.length == 0);
     return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   } else if (ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
@@ -135,6 +139,8 @@ function ezCheckProbability(
   monad = copyofmonad;
   return monad;
 }
+/* console.log(ezProbabilityPyramid[1].Easy.length) */
+/* setInterval(() =>console.log(generateQuestion(40,['monad'],['Easy'])), 500); */
 //console.log(ezProbabilityPyramid);
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');

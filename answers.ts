@@ -31,7 +31,6 @@ function shuffle(a: any[]) {
       array[i] = array[j];
       array[j] = x;
     }
-
     return array;
   }
 }
@@ -44,8 +43,7 @@ function ansGenerat(correctAns: number) {
   return shuffle(arr);
 }
 export function ansArray(symmatricNum: number, multiblyNumber: number) {
-  //debugger
-
+ 
   let first = symmatricNum * multiblyNumber;
   let answers: any[];
 

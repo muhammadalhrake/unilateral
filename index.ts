@@ -2,6 +2,7 @@
 import './style.css';
 import random from 'random';
 import { monad } from './model';
+import { ansArray } from './answers';
 //helper function
 
 function between(min: number, max: number) {
@@ -53,27 +54,40 @@ let ezProbabilityPyramid: A = {
 let ez = new Array<number>();
 let hard = new Array<number>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
+  generateQuestions: monad;
   for (let i = 0; i < count; i++) {
     for (let j = 0; j < ruls.length; j++) {
       for (let k = 0; k < state.length; k++) {
         let rule = ruls[j];
         let stat = state[k];
         if (rule == 'monad') {
+          generateMonad(ez, hard, stat);
         }
       }
     }
   }
 }
-function generateMonad(ez: [], hard: [], stat: string) {}
+/* TODO gnenrat monad question  */
+function generateMonad(ez: number[], hard: number[], stat: string) {
+  if (stat == 'Easy') {
+    return ezgeneratemonad(ezProbabilityPyramid, ez);
+  } else [];
+}
+
+/* in this function we generat singel guestion for eazy monad */
 function ezgeneratemonad(ezProbabilityPyramid: A, ez: number[]) {
   let firstNum = between(1, 8);
   if (ez.length == 0) {
     ez.push(firstNum);
+    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   } else if (ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
+    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
+  } else {
+    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   }
 }
-// in this function we generate the second number of guestion
+/* in this function we generate the second number of guestion */
 function ezCheckProbability(
   ezProbabilityPyramid: A,
   firstNum: number,
@@ -93,19 +107,30 @@ function ezCheckProbability(
   if (ezProbabilityPyramid[firstNum].Easy.length == 0) {
     //generat first second number
     ezProbabilityPyramid[firstNum].Easy.push(secondNum);
+    copyofmonad.firstNumber = firstNum;
+    copyofmonad.secondNumber = secondNum;
+    copyofmonad.answers = ansArray(firstNum, secondNum);
   } else if (ezCheckProbability[firstNum].length == 9 - firstNum) {
     ezCheckProbability[firstNum] = [];
     ez.filter(num => num != firstNum);
     ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   } else if (ezProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1) {
     ezProbabilityPyramid[firstNum].Easy.push(secondNum);
+    copyofmonad.firstNumber = firstNum;
+    copyofmonad.secondNumber = secondNum;
+    copyofmonad.answers = ansArray(firstNum, secondNum);
   } else {
     for (let i = 0; i < 9 - firstNum; i++) {
       if (ezProbabilityPyramid[firstNum].Easy.indexOf(i) == -1) {
         ezProbabilityPyramid[firstNum].Easy.push(i);
+        copyofmonad.firstNumber = firstNum;
+        copyofmonad.secondNumber = i;
+        copyofmonad.answers = ansArray(firstNum, i);
       }
     }
   }
+  monad = copyofmonad;
+  return monad;
 }
 //console.log(ezProbabilityPyramid);
 // Write TypeScript code!

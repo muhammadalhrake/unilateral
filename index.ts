@@ -54,7 +54,7 @@ let ezProbabilityPyramid: A = {
 let ez = new Array<number>();
 let hard = new Array<number>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
-  let generateQuestions = new Array<monad>();
+  let generateQuestions=new Array<monad>();
   let generate: monad;
   for (let i = 0; i < count; ) {
     for (let j = 0; j < ruls.length && i < count; j++) {
@@ -62,6 +62,8 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
         let rule = ruls[j];
         let stat = state[k];
         if (rule == 'monad') {
+
+          //console.log(ezProbabilityPyramid[1].Easy.length)
           generate = generateMonad(ez, hard, stat);
         }
         i++;
@@ -69,14 +71,15 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
       }
     }
   }
+  return generateQuestions
 }
 /* TODO gnenrat monad question  */
 function generateMonad(ez: number[], hard: number[], stat: string) {
   if (stat == 'Easy') {
     return ezgeneratemonad(ezProbabilityPyramid, ez);
   } else {
-    console.log('hello faild');
-  }
+    console.log("hello faild")
+  };
 }
 
 /* in this function we generat singel guestion for eazy monad */
@@ -84,8 +87,8 @@ function ezgeneratemonad(ezProbabilityPyramid: A, ez: number[]) {
   let firstNum = between(1, 8);
   if (ez.length == 0) {
     ez.push(firstNum);
-    console.log(firstNum);
-    console.log(ezProbabilityPyramid[firstNum].Easy.length == 0);
+    console.log(firstNum)
+    console.log(ezProbabilityPyramid[firstNum].Easy.length==0)
     return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   } else if (ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
@@ -111,18 +114,23 @@ function ezCheckProbability(
   if (ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
   }
+  console.log(ezProbabilityPyramid[firstNum].Easy.length)
   if (ezProbabilityPyramid[firstNum].Easy.length == 0) {
     //generat first second number
     ezProbabilityPyramid[firstNum].Easy.push(secondNum);
+    let first =[firstNum.toString(),'1'];
+    firstNum=+first.join('');
     copyofmonad.firstNumber = firstNum;
     copyofmonad.secondNumber = secondNum;
     copyofmonad.answers = ansArray(firstNum, secondNum);
   } else if (ezCheckProbability[firstNum].length == 9 - firstNum) {
-    ezCheckProbability[firstNum] = [];
+    //ezCheckProbability[firstNum] = [];
     ez.filter(num => num != firstNum);
     ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
   } else if (ezProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1) {
     ezProbabilityPyramid[firstNum].Easy.push(secondNum);
+    let first =[firstNum.toString(),'1'];
+    firstNum=+first.join('');
     copyofmonad.firstNumber = firstNum;
     copyofmonad.secondNumber = secondNum;
     copyofmonad.answers = ansArray(firstNum, secondNum);
@@ -130,6 +138,8 @@ function ezCheckProbability(
     for (let i = 0; i < 9 - firstNum; i++) {
       if (ezProbabilityPyramid[firstNum].Easy.indexOf(i) == -1) {
         ezProbabilityPyramid[firstNum].Easy.push(i);
+        let first =[firstNum.toString(),'1'];
+        firstNum=+first.join('');
         copyofmonad.firstNumber = firstNum;
         copyofmonad.secondNumber = i;
         copyofmonad.answers = ansArray(firstNum, i);
@@ -139,6 +149,8 @@ function ezCheckProbability(
   monad = copyofmonad;
   return monad;
 }
+console.log(generateQuestion(1,['monad'],['Easy']));
+
 /* console.log(ezProbabilityPyramid[1].Easy.length) */
 /* setInterval(() =>console.log(generateQuestion(40,['monad'],['Easy'])), 500); */
 //console.log(ezProbabilityPyramid);

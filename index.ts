@@ -66,7 +66,7 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   }
   return generateQuestions;
 }
-/* console.log(generateQuestion(15,['monad'],['Difficult']));
+/* console.log(generateQuestion(30,['monad'],['Easy','Difficult']));
 console.log(singelOnesProbabilityPyramid)
 console.log(hard) */
 const appDiv: HTMLElement = document.getElementById('app');

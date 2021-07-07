@@ -28,21 +28,21 @@ function ezgeneratemonad(
   ez: number[]
 ) {
   let firstNum = between(1, 8);
-  if (ez.length == 0||ez.indexOf(firstNum) == -1) {
+  if (ez.length == 0 || ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
-    return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
+    return ezCheckProbability(singelOnesProbabilityPyramid, firstNum);
   } else {
     if (ez.length < 8) {
       for (let i = 1; i <= 8; i++) {
         if (ez.indexOf(i) == -1) {
           ez.push(i);
-          return ezCheckProbability(singelOnesProbabilityPyramid, i, ez);
+          return ezCheckProbability(singelOnesProbabilityPyramid, i);
         }
       }
     } else {
       for (let i = 1; i < ez.length; i++) {
         if (singelOnesProbabilityPyramid[i].Easy.length != 9 - i) {
-          return ezCheckProbability(singelOnesProbabilityPyramid, i, ez);
+          return ezCheckProbability(singelOnesProbabilityPyramid, i);
         }
       }
       ez.forEach(index => {
@@ -55,8 +55,7 @@ function ezgeneratemonad(
 /* in this function we generate the second number of guestion */
 function ezCheckProbability(
   singelOnesProbabilityPyramid: Probability,
-  firstNum: number,
-  ez: number[]
+  firstNum: number
 ) {
   let copyofmonad = {
     answers: [5, 5, 5, 5],
@@ -95,11 +94,9 @@ function ezCheckProbability(
 }
 /*in this function we generat singel guestion for Difficult singel ones*/
 
-
 function hardGenerationMonad(
   singelOnesProbabilityPyramid: Probability,
-  firstNum: number,
-  ez: number[]
+  firstNum: number
 ) {
   let copyofmonad = {
     answers: [5, 5, 5, 5],
@@ -107,14 +104,13 @@ function hardGenerationMonad(
     secondNumber: 5
   };
 
-  let secondNum = between(10-firstNum,9);
-  console.log(singelOnesProbabilityPyramid[firstNum].Easy.length);
+  let secondNum = between(10 - firstNum, 9);
   if (
-    singelOnesProbabilityPyramid[firstNum].Easy.length == 0 ||
-    singelOnesProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1
+    singelOnesProbabilityPyramid[firstNum].Difficult.length == 0 ||
+    singelOnesProbabilityPyramid[firstNum].Difficult.indexOf(secondNum) == -1
   ) {
     /* generat first second number */
-    singelOnesProbabilityPyramid[firstNum].Easy.push(secondNum);
+    singelOnesProbabilityPyramid[firstNum].Difficult.push(secondNum);
     let firstNumber = +(firstNum + '1');
     copyofmonad.firstNumber = firstNumber;
     secondNum = +(secondNum + '1');
@@ -123,9 +119,9 @@ function hardGenerationMonad(
     return copyofmonad;
   } else {
     /* to compleat all probability space after the first random generation  */
-    for (let i = 1; i <= 9 - firstNum; i++) {
-      if (singelOnesProbabilityPyramid[firstNum].Easy.indexOf(i) == -1) {
-        singelOnesProbabilityPyramid[firstNum].Easy.push(i);
+    for (let i = 1; i <= firstNum; i++) {
+      if (singelOnesProbabilityPyramid[firstNum].Difficult.indexOf(i) == -1) {
+        singelOnesProbabilityPyramid[firstNum].Difficult.push(i);
         let firstNumber = +(firstNum + '1');
         copyofmonad.firstNumber = firstNumber;
         secondNum = +(i + '1');

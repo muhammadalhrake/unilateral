@@ -33,7 +33,7 @@ function ezgeneratemonad(
     return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
   } else {
     if (ez.length < 8) {
-      for (let i = 1; i < 9; i++) {
+      for (let i = 1; i <= 8; i++) {
         if (ez.indexOf(i) == -1) {
           ez.push(i);
           return ezCheckProbability(singelOnesProbabilityPyramid, i, ez);
@@ -65,9 +65,6 @@ function ezCheckProbability(
   };
 
   let secondNum = between(1, 9 - firstNum);
-  if (ez.indexOf(firstNum) == -1) {
-    ez.push(firstNum);
-  }
   console.log(singelOnesProbabilityPyramid[firstNum].Easy.length);
   if (
     singelOnesProbabilityPyramid[firstNum].Easy.length == 0 ||
@@ -99,6 +96,43 @@ function ezCheckProbability(
 /*in this function we generat singel guestion for Difficult singel ones*/
 
 
-function hardGenerationMonad(){
+function hardGenerationMonad(
+  singelOnesProbabilityPyramid: Probability,
+  firstNum: number,
+  ez: number[]
+) {
+  let copyofmonad = {
+    answers: [5, 5, 5, 5],
+    firstNumber: 5,
+    secondNumber: 5
+  };
 
+  let secondNum = between(10-firstNum,9);
+  console.log(singelOnesProbabilityPyramid[firstNum].Easy.length);
+  if (
+    singelOnesProbabilityPyramid[firstNum].Easy.length == 0 ||
+    singelOnesProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1
+  ) {
+    /* generat first second number */
+    singelOnesProbabilityPyramid[firstNum].Easy.push(secondNum);
+    let firstNumber = +(firstNum + '1');
+    copyofmonad.firstNumber = firstNumber;
+    secondNum = +(secondNum + '1');
+    copyofmonad.secondNumber = secondNum;
+    copyofmonad.answers = ansArray(firstNumber, secondNum);
+    return copyofmonad;
+  } else {
+    /* to compleat all probability space after the first random generation  */
+    for (let i = 1; i <= 9 - firstNum; i++) {
+      if (singelOnesProbabilityPyramid[firstNum].Easy.indexOf(i) == -1) {
+        singelOnesProbabilityPyramid[firstNum].Easy.push(i);
+        let firstNumber = +(firstNum + '1');
+        copyofmonad.firstNumber = firstNumber;
+        secondNum = +(i + '1');
+        copyofmonad.secondNumber = secondNum;
+        copyofmonad.answers = ansArray(firstNumber, secondNum);
+        return copyofmonad;
+      }
+    }
+  }
 }

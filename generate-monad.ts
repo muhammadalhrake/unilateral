@@ -1,15 +1,20 @@
 import random from 'random';
 import { ansArray } from './answers';
-import {Probability}from './model'
+import { Probability } from './model';
 
-////helper function
+/* helper function */
 
 function between(min: number, max: number) {
   return random.int(min, max);
 }
 
-
-export function generateMonad(ez: number[],singelOnesProbabilityPyramid:Probability, hard: number[], stat: string) {
+/* TODO gnenrat sengen ones question  */
+export function generateMonad(
+  ez: number[],
+  singelOnesProbabilityPyramid: Probability,
+  hard: number[],
+  stat: string
+) {
   if (stat == 'Easy') {
     return ezgeneratemonad(singelOnesProbabilityPyramid, ez);
   } else {
@@ -18,17 +23,17 @@ export function generateMonad(ez: number[],singelOnesProbabilityPyramid:Probabil
 }
 
 /* in this function we generat singel guestion for eazy monad */
-function ezgeneratemonad(singelOnesProbabilityPyramid: Probability, ez: number[]) {
+function ezgeneratemonad(
+  singelOnesProbabilityPyramid: Probability,
+  ez: number[]
+) {
   let firstNum = between(1, 8);
   if (ez.length == 0) {
     ez.push(firstNum);
     console.log(firstNum);
-    //console.log("i'm case 1")
-    //console.log(singelOnesProbabilityPyramid[firstNum].Easy.length == 0);
     return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
   } else if (ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
-    //console.log("i'm case 2");
     return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
   } else {
     if (ez.length < 8) {
@@ -57,7 +62,6 @@ function ezCheckProbability(
   firstNum: number,
   ez: number[]
 ) {
-  //let monad: monad;
   let copyofmonad = {
     answers: [5, 5, 5, 5],
     firstNumber: 5,
@@ -69,8 +73,11 @@ function ezCheckProbability(
     ez.push(firstNum);
   }
   console.log(singelOnesProbabilityPyramid[firstNum].Easy.length);
-  if (singelOnesProbabilityPyramid[firstNum].Easy.length == 0||singelOnesProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1) {
-    //generat first second number
+  if (
+    singelOnesProbabilityPyramid[firstNum].Easy.length == 0 ||
+    singelOnesProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1
+  ) {
+    /* generat first second number */
     singelOnesProbabilityPyramid[firstNum].Easy.push(secondNum);
     let firstNumber = +(firstNum + '1');
     copyofmonad.firstNumber = firstNumber;

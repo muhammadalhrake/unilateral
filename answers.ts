@@ -1,6 +1,5 @@
 import random from 'random';
 function shuffle(a: any[]) {
-  //debugger
   let array = [...a];
   let j, x, i;
   if (array.length == 3) {
@@ -43,7 +42,6 @@ function ansGenerat(correctAns: number) {
   return shuffle(arr);
 }
 export function ansArray(symmatricNum: number, multiblyNumber: number) {
- 
   let first = symmatricNum * multiblyNumber;
   let answers: any[];
 

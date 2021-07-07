@@ -61,15 +61,8 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   }
   return generateQuestions;
 }
-/* TODO gnenrat monad question  */
 
-//console.log(generateQuestion(40, ['singelOnes'], ['Easy']));
-//console.log(singelOnesProbabilityPyramid);
 
-/* console.log(singelOnesProbabilityPyramid[1].Easy.length) */
-/* setInterval(() =>console.log(generateQuestion(40,['monad'],['Easy'])), 500); */
-//console.log(singelOnesProbabilityPyramid);
-// Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
 

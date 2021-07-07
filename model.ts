@@ -9,3 +9,7 @@ export interface Probability {
     Difficult: number[];
   };
 }
+export interface stateOfSingelTens{
+  EZ:string[];
+  Hard:string[];
+}

@@ -1,6 +1,6 @@
 // Import stylesheets
 import './style.css';
-import { monad, Probability } from './model';
+import { monad, Probability, stateOfSingelTens } from './model';
 import { generateMonad } from './generate-monad';
 import { generateSingelTens } from './singel-tens';
 //Probability space tree for  //
@@ -43,6 +43,10 @@ let singelOnesProbabilityPyramid: Probability = {
 };
 let ezSingelOnes = new Array<number>();
 let hardSingelOnes = new Array<number>();
+let singelTensProbabilityPyramid: stateOfSingelTens = {
+  EZ: new Array<string>(),
+  Hard: new Array<string>()
+};
 let ezSingelTens = new Array<string>();
 let hardSingelTens = new Array<string>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {

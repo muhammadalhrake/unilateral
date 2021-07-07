@@ -18,7 +18,7 @@ export function generateMonad(
   if (stat == 'Easy') {
     return ezgeneratemonad(singelOnesProbabilityPyramid, ez, 'Easy');
   } else {
-    console.log('hello faild');
+    return ezgeneratemonad(singelOnesProbabilityPyramid, hard, 'Difficult');
   }
 }
 

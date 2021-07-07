@@ -16,7 +16,7 @@ export function generateMonad(
   stat: string
 ) {
   if (stat == 'Easy') {
-    return ezgeneratemonad(singelOnesProbabilityPyramid, ez);
+    return ezgeneratemonad(singelOnesProbabilityPyramid, ez, 'Easy');
   } else {
     console.log('hello faild');
   }
@@ -25,30 +25,52 @@ export function generateMonad(
 /* in this function we generat singel guestion for eazy singel ones */
 function ezgeneratemonad(
   singelOnesProbabilityPyramid: Probability,
-  ez: number[]
+  state: number[],
+  level: string
 ) {
-  let firstNum = between(1, 8);
-  if (ez.length == 0 || ez.indexOf(firstNum) == -1) {
-    ez.push(firstNum);
-    return ezCheckProbability(singelOnesProbabilityPyramid, firstNum);
+  let firstNum, range;
+  if (level == 'Easy') {
+    range = 8;
+    firstNum = between(1, range);
+  } else if (level == 'Difficult') {
+    range = 9;
+    firstNum = between(1, range);
+  }
+  if (state.length == 0 || state.indexOf(firstNum) == -1) {
+    state.push(firstNum);
+    if (level == 'Easy') {
+      return ezCheckProbability(singelOnesProbabilityPyramid, firstNum);
+    } else if (level == 'Difficult') {
+      return hardGenerationMonad(singelOnesProbabilityPyramid, firstNum);
+    }
   } else {
-    if (ez.length < 8) {
-      for (let i = 1; i <= 8; i++) {
-        if (ez.indexOf(i) == -1) {
-          ez.push(i);
-          return ezCheckProbability(singelOnesProbabilityPyramid, i);
+    if (state.length < range) {
+      for (let i = 1; i <= range; i++) {
+        if (state.indexOf(i) == -1) {
+          state.push(i);
+          if (level == 'Easy') {
+            return ezCheckProbability(singelOnesProbabilityPyramid, i);
+          } else if (level == 'Difficult') {
+            return hardGenerationMonad(singelOnesProbabilityPyramid, i);
+          }
         }
       }
     } else {
-      for (let i = 1; i < ez.length; i++) {
-        if (singelOnesProbabilityPyramid[i].Easy.length != 9 - i) {
-          return ezCheckProbability(singelOnesProbabilityPyramid, i);
+      for (let i = 1; i < state.length; i++) {
+        if (level == 'Easy') {
+          if (singelOnesProbabilityPyramid[i].Easy.length != 9 - i) {
+            return ezCheckProbability(singelOnesProbabilityPyramid, i);
+          }
+        } else if (level == 'Difficult') {
+          if (singelOnesProbabilityPyramid[i].Difficult.length != i) {
+            return hardGenerationMonad(singelOnesProbabilityPyramid, i);
+          }
         }
       }
-      ez.forEach(index => {
+      state.forEach(index => {
         singelOnesProbabilityPyramid[index].Easy = [];
       });
-      return ezgeneratemonad(singelOnesProbabilityPyramid, ez);
+      return ezgeneratemonad(singelOnesProbabilityPyramid, state, level);
     }
   }
 }

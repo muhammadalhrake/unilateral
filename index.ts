@@ -43,9 +43,9 @@ let singelOnesProbabilityPyramid: Probability = {
 };
 let ezSingelOnes = new Array<number>();
 let hardSingelOnes = new Array<number>();
-let singelTensProbabilityPyramid: stateOfSingelTens = {
-  EZ: new Array<string>(),
-  Hard: new Array<string>()
+var singelTensProbabilityPyramid: stateOfSingelTens = {
+  EZ:[],
+  Hard: []
 };
 let ezSingelTens = new Array<string>();
 let hardSingelTens = new Array<string>();
@@ -65,7 +65,10 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
             stat
           );
         } else if (rule == 'sengelTens') {
-          generate = generateSingelTens(ezSingelTens, hardSingelTens, stat);
+          generate = generateSingelTens(
+            singelTensProbabilityPyramid,
+            stat
+          );
         }
         i++;
         generateQuestions.push(generate);
@@ -75,9 +78,9 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   return generateQuestions;
 }
 //console.log((+(4+2).toString().length==1&&+(4*2).toString().length==1));
-//console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
+console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
 //console.log(singelOnesProbabilityPyramid)
-//console.log(hardSingelTens);
+console.log(singelTensProbabilityPyramid.Hard);
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
 

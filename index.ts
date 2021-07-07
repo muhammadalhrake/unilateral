@@ -71,9 +71,9 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   return generateQuestions;
 }
 //console.log((+(4+2).toString().length==1&&+(4*2).toString().length==1));
-console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
+//console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
 //console.log(singelOnesProbabilityPyramid)
-console.log(ezSingelTens);
+//console.log(hardSingelTens);
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
 

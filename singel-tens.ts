@@ -5,7 +5,11 @@ import { ansArray } from './answers';
 function between(min: number, max: number) {
   return random.int(min, max);
 }
-
+function filterA(arr:string[],mumber:string){
+  return arr.filter(index => {
+    index != mumber;
+  });
+}
 export function generateSingelTens(ez: string[], hard: string[], stat: string) {
   let copyOfMonad = {
     answers: [5, 5, 5, 5],
@@ -24,23 +28,21 @@ export function generateSingelTens(ez: string[], hard: string[], stat: string) {
     copyOfMonad.firstNumber = +question[0];
     copyOfMonad.secondNumber = +question[1];
     copyOfMonad.answers = ansArray(+question[0], +question[1]);
-    ez.filter(index => {
-      index != mumber;
-    });
+   
+    ez=filterA(ez,mumber)
+    
     return copyOfMonad;
   } else if (stat == 'Difficult') {
-    console.log(hard)
-    console.log(ez)
+    //console.log(hard)
+    //console.log(ez)
     let random = between(0, hard.length - 1);
     let mumber = hard[random];
-    console.log(mumber)
+    //console.log(mumber)
     let question = mumber.split('*');
     copyOfMonad.firstNumber = +question[0];
     copyOfMonad.secondNumber = +question[1];
     copyOfMonad.answers = ansArray(+question[0], +question[1]);
-    hard.filter(index => {
-      index != mumber;
-    });
+    hard=filterA(hard,mumber)
     return copyOfMonad;
   }
 }

@@ -14,10 +14,12 @@ export function generateSingelTens(ez: string[], hard: string[], stat: string) {
   };
   if (ez.length == 0 || hard.length == 0) {
     generateProbabilitySpace(ez, hard, stat);
+    console.log("mmmm")
   }
   if (stat == 'Easy') {
     let random = between(0, ez.length - 1);
     let mumber = ez[random];
+    console.log(mumber)
     let question = mumber.split('*');
     copyOfMonad.firstNumber = +question[0];
     copyOfMonad.secondNumber = +question[1];
@@ -27,8 +29,11 @@ export function generateSingelTens(ez: string[], hard: string[], stat: string) {
     });
     return copyOfMonad;
   } else if (stat == 'Difficult') {
+    console.log(hard)
+    console.log(ez)
     let random = between(0, hard.length - 1);
     let mumber = hard[random];
+    console.log(mumber)
     let question = mumber.split('*');
     copyOfMonad.firstNumber = +question[0];
     copyOfMonad.secondNumber = +question[1];
@@ -42,19 +47,25 @@ export function generateSingelTens(ez: string[], hard: string[], stat: string) {
 
 function generateProbabilitySpace(ez: string[], hard: string[], stat: string) {
   for (let i = 0; i <= 9; i++) {
-    for (let j = 0; j < 9; j++) {
+    for (let j = 0; j <= 9; j++) {
       if ((i + j).toString().length > 1 || (i * j).toString().length > 1) {
         let first = '1' + i;
         let second = '1' + j;
         let question = first + '*' + second;
         hard.push(question);
+        
       } else {
         //ez way
         let first = '1' + i;
         let second = '1' + j;
         let question = first + '*' + second;
-        hard.push(question);
+        ez.push(question);
       }
     }
+  }
+  if(stat=="Easy"){
+    return ez
+  }else{
+    return hard
   }
 }

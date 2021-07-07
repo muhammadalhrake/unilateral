@@ -2,7 +2,7 @@
 import './style.css';
 import { monad, Probability } from './model';
 import { generateMonad } from './generate-monad';
-import{generateSingelTens}from './singel-tens'
+import { generateSingelTens } from './singel-tens';
 //Probability space tree for  //
 let singelOnesProbabilityPyramid: Probability = {
   1: {
@@ -43,8 +43,8 @@ let singelOnesProbabilityPyramid: Probability = {
 };
 let ezSingelOnes = new Array<number>();
 let hardSingelOnes = new Array<number>();
-let ezSingelTens=new Array<string>();
-let hardSingelTens=new Array<string>();
+let ezSingelTens = new Array<string>();
+let hardSingelTens = new Array<string>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
   let generateQuestions = new Array<monad>();
   let generate: monad;
@@ -60,8 +60,8 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
             hardSingelOnes,
             stat
           );
-        }else if(rule=="sengelTens"){
-          generate=generateSingelTens(ezSingelTens,hardSingelTens,stat)
+        } else if (rule == 'sengelTens') {
+          generate = generateSingelTens(ezSingelTens, hardSingelTens, stat);
         }
         i++;
         generateQuestions.push(generate);
@@ -71,9 +71,9 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   return generateQuestions;
 }
 //console.log((+(4+2).toString().length==1&&+(4*2).toString().length==1));
-/* console.log(generateQuestion(30,['sengelTens'],['Easy','Difficult']));
-console.log(singelOnesProbabilityPyramid)
-console.log(hard) */
+console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
+//console.log(singelOnesProbabilityPyramid)
+console.log(ezSingelTens);
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
 

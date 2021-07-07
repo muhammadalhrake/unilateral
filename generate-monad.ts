@@ -22,7 +22,7 @@ export function generateMonad(
   }
 }
 
-/* in this function we generat singel guestion for eazy monad */
+/* in this function we generat singel guestion for eazy singel ones */
 function ezgeneratemonad(
   singelOnesProbabilityPyramid: Probability,
   ez: number[]
@@ -100,3 +100,4 @@ function ezCheckProbability(
     }
   }
 }
+/*in this function we generat singel guestion for Difficult singel ones*/

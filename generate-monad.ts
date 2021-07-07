@@ -56,7 +56,7 @@ function ezgeneratemonad(
         }
       }
     } else {
-      for (let i = state.length; i >1; i--) {
+      for (let i = state.length; i > 1; i--) {
         if (level == 'Easy') {
           if (singelOnesProbabilityPyramid[i].Easy.length != 9 - i) {
             return ezCheckProbability(singelOnesProbabilityPyramid, i);
@@ -71,8 +71,6 @@ function ezgeneratemonad(
       state.forEach(index => {
         if (level == 'Easy') {
           singelOnesProbabilityPyramid[index].Easy = [];
-        } else {
-          singelOnesProbabilityPyramid[index].Difficult = [];
         }
       });
 
@@ -144,12 +142,12 @@ function hardGenerationMonad(
     secondNum = +(secondNum + '1');
     copyofmonad.secondNumber = secondNum;
     copyofmonad.answers = ansArray(firstNumber, secondNum);
-    console.log("first "+firstNumber + ' **  ' + secondNum);
+    console.log('first ' + firstNumber + ' **  ' + secondNum);
     return copyofmonad;
   } else {
-    console.log("hero")
+    console.log('hero');
     /* to compleat all probability space after the first random generation  */
-    for (let i = 9; i <= firstNum; i--) {
+    for (let i = 9; i >= firstNum; i--) {
       if (singelOnesProbabilityPyramid[firstNum].Difficult.indexOf(i) == -1) {
         singelOnesProbabilityPyramid[firstNum].Difficult.push(i);
         let firstNumber = +(firstNum + '1');

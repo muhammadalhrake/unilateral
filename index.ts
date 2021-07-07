@@ -52,7 +52,12 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
         let rule = ruls[j];
         let stat = state[k];
         if (rule == 'monad') {
-          generate = generateMonad(ez, singelOnesProbabilityPyramid, hard, stat);
+          generate = generateMonad(
+            ez,
+            singelOnesProbabilityPyramid,
+            hard,
+            stat
+          );
         }
         i++;
         generateQuestions.push(generate);
@@ -61,9 +66,9 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   }
   return generateQuestions;
 }
-console.log(generateQuestion(10,['monad'],['Difficult']));
+/* console.log(generateQuestion(15,['monad'],['Difficult']));
 console.log(singelOnesProbabilityPyramid)
-console.log(hard)
+console.log(hard) */
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
 

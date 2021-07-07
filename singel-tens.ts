@@ -6,7 +6,7 @@ function between(min: number, max: number) {
   return random.int(min, max);
 }
 
-function generateSingelTens(ez: string[], hard: string[], stat: string) {
+export function generateSingelTens(ez: string[], hard: string[], stat: string) {
   let copyOfMonad = {
     answers: [5, 5, 5, 5],
     firstNumber: 5,

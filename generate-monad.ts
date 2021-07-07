@@ -17,7 +17,7 @@ export function generateMonad(
 ) {
   if (stat == 'Easy') {
     return ezgeneratemonad(singelOnesProbabilityPyramid, ez, 'Easy');
-  } else {
+  } else if (stat == 'Difficult') {
     return ezgeneratemonad(singelOnesProbabilityPyramid, hard, 'Difficult');
   }
 }
@@ -67,9 +67,15 @@ function ezgeneratemonad(
           }
         }
       }
+
       state.forEach(index => {
-        singelOnesProbabilityPyramid[index].Easy = [];
+        if (level == 'Easy') {
+          singelOnesProbabilityPyramid[index].Easy = [];
+        } else {
+          singelOnesProbabilityPyramid[index].Difficult = [];
+        }
       });
+
       return ezgeneratemonad(singelOnesProbabilityPyramid, state, level);
     }
   }
@@ -141,7 +147,7 @@ function hardGenerationMonad(
     return copyofmonad;
   } else {
     /* to compleat all probability space after the first random generation  */
-    for (let i = 1; i <= firstNum; i++) {
+    for (let i = 9; i <= firstNum; i--) {
       if (singelOnesProbabilityPyramid[firstNum].Difficult.indexOf(i) == -1) {
         singelOnesProbabilityPyramid[firstNum].Difficult.push(i);
         let firstNumber = +(firstNum + '1');

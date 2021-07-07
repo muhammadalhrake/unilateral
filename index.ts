@@ -51,7 +51,7 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
       for (let k = 0; k < state.length && i < count; k++) {
         let rule = ruls[j];
         let stat = state[k];
-        if (rule == MonadTypes.SingelOnes) {
+        if (rule == 'monad') {
           generate = generateMonad(ez, singelOnesProbabilityPyramid, hard, stat);
         }
         i++;
@@ -61,7 +61,7 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   }
   return generateQuestions;
 }
-console
+console.log(generateQuestion(18,['monad'],['Easy']));
 
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;

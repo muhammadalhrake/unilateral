@@ -3,3 +3,9 @@ export interface monad {
   firstNumber: number;
   secondNumber: number;
 }
+export interface Probability {
+  [key: string]: {
+    Easy?: number[];
+    Difficult: number[];
+  };
+}

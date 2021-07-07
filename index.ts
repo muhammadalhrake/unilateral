@@ -1,20 +1,10 @@
 // Import stylesheets
 import './style.css';
-import random from 'random';
-import { monad } from './model';
-import { ansArray } from './answers';
-//helper function
+import { monad, Probability } from './model';
+import { generateMonad } from './generate-monad';
 
-function between(min: number, max: number) {
-  return random.int(min, max);
-}
-interface A {
-  [key: string]: {
-    Easy?: number[];
-    Difficult: number[];
-  };
-}
-let ezProbabilityPyramid: A = {
+//Probability space tree for  //
+let singelOnesProbabilityPyramid: Probability = {
   1: {
     Easy: new Array<number>(),
     Difficult: new Array<number>()
@@ -61,9 +51,8 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
       for (let k = 0; k < state.length && i < count; k++) {
         let rule = ruls[j];
         let stat = state[k];
-        if (rule == 'monad') {
-          //console.log(ezProbabilityPyramid[1].Easy.length)
-          generate = generateMonad(ez, hard, stat);
+        if (rule == MonadTypes.SingelOnes) {
+          generate = generateMonad(ez, singelOnesProbabilityPyramid, hard, stat);
         }
         i++;
         generateQuestions.push(generate);
@@ -73,86 +62,19 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   return generateQuestions;
 }
 /* TODO gnenrat monad question  */
-function generateMonad(ez: number[], hard: number[], stat: string) {
-  if (stat == 'Easy') {
-    return ezgeneratemonad(ezProbabilityPyramid, ez);
-  } else {
-    console.log('hello faild');
-  }
-}
 
-/* in this function we generat singel guestion for eazy monad */
-function ezgeneratemonad(ezProbabilityPyramid: A, ez: number[]) {
-  let firstNum = between(1, 8);
-  if (ez.length == 0) {
-    ez.push(firstNum);
-    console.log(firstNum);
-    console.log(ezProbabilityPyramid[firstNum].Easy.length == 0);
-    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
-  } else if (ez.indexOf(firstNum) == -1) {
-    ez.push(firstNum);
-    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
-  } else {
-    return ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
-  }
-}
-/* in this function we generate the second number of guestion */
-function ezCheckProbability(
-  ezProbabilityPyramid: A,
-  firstNum: number,
-  ez: number[]
-) {
-  let monad: monad;
-  let copyofmonad = {
-    answers: [5, 5, 5, 5],
-    firstNumber: 5,
-    secondNumber: 5
-  };
+//console.log(generateQuestion(40, ['singelOnes'], ['Easy']));
+//console.log(singelOnesProbabilityPyramid);
 
-  let secondNum = between(1, 9 - firstNum);
-  if (ez.indexOf(firstNum) == -1) {
-    ez.push(firstNum);
-  }
-  console.log(ezProbabilityPyramid[firstNum].Easy.length);
-  if (ezProbabilityPyramid[firstNum].Easy.length == 0) {
-    //generat first second number
-    ezProbabilityPyramid[firstNum].Easy.push(secondNum);
-    let first = [firstNum.toString(), '1'];
-    firstNum = +first.join('');
-    copyofmonad.firstNumber = firstNum;
-    copyofmonad.secondNumber = secondNum;
-    copyofmonad.answers = ansArray(firstNum, secondNum);
-  } else if (ezProbabilityPyramid[firstNum].Easy.length == 9 - firstNum) {
-    ezCheckProbability[firstNum] = [];
-    ez.filter(num => num != firstNum);
-    ezCheckProbability(ezProbabilityPyramid, firstNum, ez);
-  } else if (ezProbabilityPyramid[firstNum].Easy.indexOf(secondNum) == -1) {
-    ezProbabilityPyramid[firstNum].Easy.push(secondNum);
-    let first = [firstNum.toString(), '1'];
-    firstNum = +first.join('');
-    copyofmonad.firstNumber = firstNum;
-    copyofmonad.secondNumber = secondNum;
-    copyofmonad.answers = ansArray(firstNum, secondNum);
-  } else {
-    for (let i = 0; i < 9 - firstNum; i++) {
-      if (ezProbabilityPyramid[firstNum].Easy.indexOf(i) == -1) {
-        ezProbabilityPyramid[firstNum].Easy.push(i);
-        let first = [firstNum.toString(), '1'];
-        firstNum = +first.join('');
-        copyofmonad.firstNumber = firstNum;
-        copyofmonad.secondNumber = i;
-        copyofmonad.answers = ansArray(firstNum, i);
-      }
-    }
-  }
-  monad = copyofmonad;
-  return monad;
-}
-//console.log(generateQuestion(15,['monad'],['Easy']));
-
-/* console.log(ezProbabilityPyramid[1].Easy.length) */
+/* console.log(singelOnesProbabilityPyramid[1].Easy.length) */
 /* setInterval(() =>console.log(generateQuestion(40,['monad'],['Easy'])), 500); */
-//console.log(ezProbabilityPyramid);
+//console.log(singelOnesProbabilityPyramid);
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
+
+enum MonadTypes {
+  SingelOnes = 'singelOnes',
+  SingelTens = 'singelTens',
+  Mixed = 'mixed'
+}

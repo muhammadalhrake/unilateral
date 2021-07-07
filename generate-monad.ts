@@ -147,7 +147,9 @@ function hardGenerationMonad(
   } else {
     console.log('hero');
     /* to compleat all probability space after the first random generation  */
-    for (let i = 9; i >= firstNum; i--) {
+
+    let i = 9;
+    for (let k = 1; k < firstNum; k++) {
       if (singelOnesProbabilityPyramid[firstNum].Difficult.indexOf(i) == -1) {
         singelOnesProbabilityPyramid[firstNum].Difficult.push(i);
         let firstNumber = +(firstNum + '1');
@@ -158,6 +160,7 @@ function hardGenerationMonad(
         console.log(firstNumber + ' **  ' + secondNum);
         return copyofmonad;
       }
+      i--;
     }
   }
 }

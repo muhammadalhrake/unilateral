@@ -28,11 +28,7 @@ function ezgeneratemonad(
   ez: number[]
 ) {
   let firstNum = between(1, 8);
-  if (ez.length == 0) {
-    ez.push(firstNum);
-    console.log(firstNum);
-    return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
-  } else if (ez.indexOf(firstNum) == -1) {
+  if (ez.length == 0||ez.indexOf(firstNum) == -1) {
     ez.push(firstNum);
     return ezCheckProbability(singelOnesProbabilityPyramid, firstNum, ez);
   } else {
@@ -101,3 +97,8 @@ function ezCheckProbability(
   }
 }
 /*in this function we generat singel guestion for Difficult singel ones*/
+
+
+function hardGenerationMonad(){
+
+}

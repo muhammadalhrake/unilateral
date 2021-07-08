@@ -65,7 +65,12 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
             stat
           );
         } else if (rule == 'sengelTens') {
-          generate = generateSingelTens(singelTensProbabilityPyramid, stat);
+          let generated = generateSingelTens(
+            singelTensProbabilityPyramid,
+            stat
+          );
+          singelTensProbabilityPyramid = generated.levelArray;
+          generate = generated.generate;
         }
         i++;
         generateQuestions.push(generate);

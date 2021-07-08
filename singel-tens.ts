@@ -15,9 +15,12 @@ export function generateSingelTens(
   stat: string
 ) {
   let copyOfMonad = {
-    answers: [5, 5, 5, 5],
-    firstNumber: 5,
-    secondNumber: 5
+    levelArray: { EZ: [''], Hard: [''] },
+    generate: {
+      answers: [5, 5, 5, 5],
+      firstNumber: 5,
+      secondNumber: 5
+    }
   };
   if (
     singelTensProbabilityPyramid.EZ.length == 0 ||
@@ -28,17 +31,14 @@ export function generateSingelTens(
   if (stat == 'Easy') {
     let random = between(0, singelTensProbabilityPyramid.EZ.length - 1);
     let mumber = singelTensProbabilityPyramid.EZ[random];
-    console.log(mumber);
+    //console.log(mumber);
     let question = mumber.split('*');
-    copyOfMonad.firstNumber = +question[0];
-    copyOfMonad.secondNumber = +question[1];
-    copyOfMonad.answers = ansArray(+question[0], +question[1]);
+    copyOfMonad.generate.firstNumber = +question[0];
+    copyOfMonad.generate.secondNumber = +question[1];
+    copyOfMonad.generate.answers = ansArray(+question[0], +question[1]);
 
-    singelTensProbabilityPyramid.EZ = filterA(
-      singelTensProbabilityPyramid.EZ,
-      mumber
-    );
-
+    copyOfMonad.levelArray.EZ = filterA(singelTensProbabilityPyramid.EZ, mumber);
+    copyOfMonad.levelArray.Hard=singelTensProbabilityPyramid.Hard;
     return copyOfMonad;
   } else if (stat == 'Difficult') {
     //console.log(hard)
@@ -47,13 +47,11 @@ export function generateSingelTens(
     let mumber = singelTensProbabilityPyramid.Hard[random];
     //console.log(mumber)
     let question = mumber.split('*');
-    copyOfMonad.firstNumber = +question[0];
-    copyOfMonad.secondNumber = +question[1];
-    copyOfMonad.answers = ansArray(+question[0], +question[1]);
-    singelTensProbabilityPyramid.Hard = filterA(
-      singelTensProbabilityPyramid.Hard,
-      mumber
-    );
+    copyOfMonad.generate.firstNumber = +question[0];
+    copyOfMonad.generate.secondNumber = +question[1];
+    copyOfMonad.generate.answers = ansArray(+question[0], +question[1]);
+    copyOfMonad.levelArray.Hard = filterA(singelTensProbabilityPyramid.Hard, mumber);
+    copyOfMonad.levelArray.EZ=singelTensProbabilityPyramid.EZ
     return copyOfMonad;
   }
 }

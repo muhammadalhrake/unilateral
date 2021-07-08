@@ -43,6 +43,7 @@ let singelOnesProbabilityPyramid: Probability = {
 };
 let ezSingelOnes = new Array<number>();
 let hardSingelOnes = new Array<number>();
+/*  Probability of singel tens option*/
 var singelTensProbabilityPyramid: stateOfSingelTens = {
   EZ: [],
   Hard: []

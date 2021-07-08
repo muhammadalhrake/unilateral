@@ -5,11 +5,7 @@ import { stateOfSingelTens } from './model';
 function between(min: number, max: number) {
   return random.int(min, max);
 }
-function filterA(arr: string[], mumber: string) {
-  return arr.filter(index => {
-    index != mumber;
-  });
-}
+
 export function generateSingelTens(
   singelTensProbabilityPyramid: stateOfSingelTens,
   stat: string
@@ -37,8 +33,10 @@ export function generateSingelTens(
     copyOfMonad.generate.secondNumber = +question[1];
     copyOfMonad.generate.answers = ansArray(+question[0], +question[1]);
 
-    copyOfMonad.levelArray.EZ = filterA(singelTensProbabilityPyramid.EZ, mumber);
-    copyOfMonad.levelArray.Hard=singelTensProbabilityPyramid.Hard;
+    copyOfMonad.levelArray.EZ = singelTensProbabilityPyramid.EZ.filter(
+      value => value != mumber
+    );
+    copyOfMonad.levelArray.Hard = singelTensProbabilityPyramid.Hard;
     return copyOfMonad;
   } else if (stat == 'Difficult') {
     //console.log(hard)
@@ -50,8 +48,10 @@ export function generateSingelTens(
     copyOfMonad.generate.firstNumber = +question[0];
     copyOfMonad.generate.secondNumber = +question[1];
     copyOfMonad.generate.answers = ansArray(+question[0], +question[1]);
-    copyOfMonad.levelArray.Hard = filterA(singelTensProbabilityPyramid.Hard, mumber);
-    copyOfMonad.levelArray.EZ=singelTensProbabilityPyramid.EZ
+    copyOfMonad.levelArray.Hard = singelTensProbabilityPyramid.Hard.filter(
+      value => value != mumber
+    );
+    copyOfMonad.levelArray.EZ = singelTensProbabilityPyramid.EZ;
     return copyOfMonad;
   }
 }

@@ -47,8 +47,6 @@ var singelTensProbabilityPyramid: stateOfSingelTens = {
   EZ: [],
   Hard: []
 };
-let ezSingelTens = new Array<string>();
-let hardSingelTens = new Array<string>();
 function generateQuestion(count: number, ruls: string[], state: string[]) {
   let generateQuestions = new Array<monad>();
   let generate: monad;
@@ -80,8 +78,8 @@ function generateQuestion(count: number, ruls: string[], state: string[]) {
   return generateQuestions;
 }
 //console.log((+(4+2).toString().length==1&&+(4*2).toString().length==1));
-console.log(generateQuestion(30, ['sengelTens'], ['Difficult']));
-console.log(singelTensProbabilityPyramid)
+//console.log(generateQuestion(40, ['sengelTens'], ['Easy']));
+//console.log(singelTensProbabilityPyramid)
 //console.log(singelTensProbabilityPyramid.Hard);
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>TypeScript Starter</h1>`;
